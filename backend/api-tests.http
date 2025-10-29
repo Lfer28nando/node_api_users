@@ -1,0 +1,103 @@
+# API Tests for User Management Backend
+# Base URL: http://localhost:3333
+
+### Register a new user
+POST http://localhost:3333/api/auth/register
+Content-Type: application/json
+
+{
+"username": "testuser",
+  "email": "test@example.com",
+  "password": "password123",
+  "firstName": "Test",
+  "lastName": "User",
+  "documentType": "Cédula",
+  "documentNumber": "123456789"
+}
+
+### Login
+POST http://localhost:3333/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "password123"
+}
+
+### Get Profile (requires auth cookie)
+GET http://localhost:3333/api/auth/profile
+
+### Edit User (requires auth cookie)
+PUT http://localhost:3333/api/auth/edit
+Content-Type: application/json
+
+{
+  "username": "updateduser"
+}
+
+### Change Password (requires auth cookie)
+PUT http://localhost:3333/api/auth/changePassword
+Content-Type: application/json
+
+{
+  "currentPassword": "password123",
+  "newPassword": "newpassword123"
+}
+
+### Request Password Reset
+POST http://localhost:3333/api/auth/requestPasswordReset
+Content-Type: application/json
+
+{
+  "email": "test@example.com"
+}
+
+### Reset Password
+POST http://localhost:3333/api/auth/resetPassword
+Content-Type: application/json
+
+{
+  "token": "reset-token-here",
+  "newPassword": "newpassword123"
+}
+
+### Request Email Verification (requires auth cookie)
+POST http://localhost:3333/api/auth/requestEmailVerification
+
+### Verify Email
+POST http://localhost:3333/api/auth/verifyEmail
+Content-Type: application/json
+
+{
+  "token": "verification-token-here"
+}
+
+### Setup 2FA (requires auth cookie)
+POST http://localhost:3333/api/auth/setup2FA
+
+### Verify and Enable 2FA (requires auth cookie)
+POST http://localhost:3333/api/auth/verify2FA
+Content-Type: application/json
+
+{
+  "token": "2fa-token-here"
+}
+
+### Disable 2FA (requires auth cookie)
+POST http://localhost:3333/api/auth/disable2FA
+Content-Type: application/json
+
+{
+  "password": "password123"
+}
+
+### Logout
+GET http://localhost:3333/api/auth/logout
+
+### Unsubscribe/Delete Account (requires auth cookie)
+POST http://localhost:3333/api/auth/unsubscribe
+Content-Type: application/json
+
+{
+  "password": "newpassword123"
+}
